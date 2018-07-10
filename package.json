@@ -1,0 +1,31 @@
+{
+  "name": "restloginapi",
+  "version": "1.0.0",
+  "description": "Rest Login API for Baby Destination",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chalukyaj/restLoginAPI.git"
+  },
+  "keywords": [
+    "Node",
+    "Express",
+    "PostgreSQL",
+    "REST",
+    "Login"
+  ],
+  "author": "Chalukya J",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chalukyaj/restLoginAPI/issues"
+  },
+  "homepage": "https://github.com/chalukyaj/restLoginAPI#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "morgan": "^1.9.0"
+  }
+}

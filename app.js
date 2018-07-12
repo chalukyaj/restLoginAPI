@@ -2,11 +2,33 @@ const express = require ('express');
 const app = express ();
 
 const bodyParser = require ('body-parser');
+const loginRoutes = require ('./api/routes/login');
+const auth = require('./auth/auth');
+
+//Server Monitoring with Morgan
 const morgan = require ('morgan');
+
 app.use(morgan('dev'));
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+
+//Handling CORS
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+
+    if(req.method === 'OPTIONS') {
+        res.header('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
+        return res.status(200).json({});
+    }
+
+    next();
+})
+
+app.use('/', auth);
+
+app.use('/user', loginRoutes);
 
 //Handling cases where there is no valid API endpoint
 app.use((req, res, next) => {

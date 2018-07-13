@@ -112,16 +112,17 @@ login.patch('/profile', async function (req, res, next) {
         err = true;
         errMsg = `Replacement can't be empty`;
     }
-    
-    let r = await db.query('UPDATE users SET name = $1 WHERE id = $2', [n, config.userID]);
-    if(r.rowCount) {
-        return res.status(200).json({
-            msg : "Update Successful"
-        });
-    }
-    else {
-        err = true;
-        errMsg = 'Email not found';
+    if(!err) {
+        let r = await db.query('UPDATE users SET name = $1 WHERE id = $2', [n, config.userID]);
+        if(r.rowCount) {
+            return res.status(200).json({
+                msg : "Update Successful"
+            });
+        }
+        else {
+            err = true;
+            errMsg = 'Email not found';
+        }
     }
     if(err) {
         return res.status(400).json({

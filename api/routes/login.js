@@ -112,7 +112,6 @@ login.patch('/profile', async function (req, res, next) {
         errMsg = `Replacement can't be empty`;
     }
     
-    console.log(config.userID);
     let r = await db.query('UPDATE users SET name = $1 WHERE id = $2', [n, config.userID]);
     if(r.rowCount) {
         return res.status(200).json({

@@ -103,20 +103,17 @@ login.post('/log', async (req, res, next) => {
 });
 
 login.patch('/profile', async function (req, res, next) {
-    let e = req.body.email, n = req.body.fullname;
+    let n = req.body.fullname;
 
     let emailReg = new RegExp('^[a-zA-Z]+[a-zA-Z0-9]*@[a-zA-Z]+\.[a-zA-Z]+$'), err = false, errMsg = '';
-
-    if(!e || !emailReg.test(e)) {
-        err = true;
-        errMsg = 'Invalid Email'
-    }
-    else if(!n) {
+    
+    if(!n) {
         err = true;
         errMsg = `Replacement can't be empty`;
     }
     
-    let r = await db.query('UPDATE users SET name = $1 WHERE email = $2', [n, e]);
+    console.log(config.userID);
+    let r = await db.query('UPDATE users SET name = $1 WHERE id = $2', [n, config.userID]);
     if(r.rowCount) {
         return res.status(200).json({
             msg : "Update Successful"

@@ -32,6 +32,7 @@ router.all('/*', function (req, res, next) {
                 });
             }
             
+            config.userID = decoded.id;
             next();
         });
     }

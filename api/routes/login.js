@@ -19,8 +19,9 @@ login.post('/register', async (req, res, next) => {
         err = true;
         errMsg = `Invalid ${!n ? 'Name' : 'Password'}`;
     }
-    p = bCrypt.hashSync(p, 10);
     if(!err) {
+
+        p = bCrypt.hashSync(p, 10);
         try {
             await db.query('INSERT INTO users (name, email, pass) VALUES ($1, $2, $3)', [n, e, p]);
             
